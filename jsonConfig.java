@@ -1,4 +1,4 @@
-
+//import org.json.simple.JSONObject;
 /**
  * Configurator of JSON-Files for Automat
  *

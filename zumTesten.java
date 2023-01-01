@@ -28,7 +28,9 @@ public class zumTesten
         try {
             Automat a = new Automat();
             a.parseXMLtoAutomat("input/configTest.xml");
-            //System.out.println(a.getZustaendeAnzahl()); // 4
+            a.removeZustand(3);
+            System.out.println(a.getZustaendeAnzahl()); // 3
+            a.toString();
             //System.out.println(a.gehoertZuSprache("aa")); // true
             //System.out.println(a.gehoertZuSprache("ba")); // true
             //System.out.println(a.gehoertZuSprache("ac")); // true
@@ -36,7 +38,7 @@ public class zumTesten
             //System.out.println(a.gehoertZuSprache("abc")); // false
             //System.out.println(a.gehoertZuSprache("")); // false
             //System.out.println(a.gehoertZuSprache("ab")); // false
-            System.out.println(a.parseAutomatToXML("output/configOutputTest.xml"));
+            //System.out.println(a.parseAutomatToXML("output/configOutputTest.xml")); // true
         }
         catch (Exception e) {e.printStackTrace();}
 

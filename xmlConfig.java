@@ -165,8 +165,8 @@ public class xmlConfig extends Config
             transformer.transform(source, result);
 
             // Output to console for testing
-            StreamResult consoleResult = new StreamResult(System.out);
-            transformer.transform(source, consoleResult);
+            //StreamResult consoleResult = new StreamResult(System.out);
+            //transformer.transform(source, consoleResult);
         }
         catch (Exception e) {
             e.printStackTrace();

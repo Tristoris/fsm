@@ -11,6 +11,7 @@ public class Automat
     private int[] endzustaende;
     private char[] alphabet;
     private int start;
+    private boolean[] zustaendeListe;
 
     /**
      * Automat braucht die Uebergangstabelle, Endzustaende, das Alphabet und den Startzustand
@@ -156,6 +157,34 @@ public class Automat
         return true;
     }
 
+    // remove a letter from the alphabet
+    public boolean removeZustand (int zustand) {
+        if (uebergangstabelle.length != 1) {
+            for (int i = 0; i < uebergangstabelle.length - 1; i++) {
+                if (i == zustand) {
+                    for (int z = i; z < uebergangstabelle.length; z++) {
+                        for (int j = 0; j < uebergangstabelle[0].length; j++) {
+                            uebergangstabelle[z][j] = uebergangstabelle[z + 1][j];
+                        }
+
+                        int[][] temp = new int[uebergangstabelle.length][uebergangstabelle[0].length];
+                        for (int j = 0; j < uebergangstabelle[0].length; j++) {
+                            temp[z][j] = uebergangstabelle[z][j];
+                        }
+
+                        uebergangstabelle = new int[temp.length - 1][temp[0].length];
+                        for (int j = 0; j < uebergangstabelle[0].length; j++) {
+                            uebergangstabelle[z][j] = temp[z][j];
+                        }
+                    }
+                    break;
+                }
+            }
+        } else return false;
+
+        return true;
+    }
+
     // change uebergang from node1 to node2
     public boolean setUebergang (int node1, int node2, char letter) {
         int index = indexImAlphabet(letter);
@@ -203,8 +232,10 @@ public class Automat
     }
 
     public boolean parseAutomatToJSON (String filePath) {
+        jsonConfig jsoncon;
+        jsoncon = new jsonConfig();
 
-        return false;
+        return jsoncon.writeFile(filePath, uebergangstabelle, endzustaende, alphabet, start);
     }
 
     // get zustaendeCount
