@@ -1,2 +1,5 @@
 *.class
 *.ctxt
+doc/*.html
+doc/*.js
+doc/*.css
