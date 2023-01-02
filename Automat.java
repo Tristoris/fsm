@@ -305,7 +305,9 @@ public class Automat
         if (uebergangstabelle != null) {
             for (int i = 0; i < uebergangstabelle.length; i++) {
                 for (int j = 0; j < uebergangstabelle[0].length; j++) {
-                    s += "(q" + i + "," + alphabet[j] + ") -> q" + uebergangstabelle[i][j];
+                    s += "(q" + i + "," + alphabet[j] + ") -> ";
+                    if (uebergangstabelle[i][j] < 0) s += "-";
+                    else s += "q" + uebergangstabelle[i][j];
                     if (j < uebergangstabelle[0].length - 1) s += ", ";
                 }
                 s += "\n";
