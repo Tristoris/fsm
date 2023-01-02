@@ -145,7 +145,7 @@ public class Automat
         for (int i = 0; i < endzustaende.length; i++) {
             if (temp[i] > zustand) {
                 endzustaende[i] = zustand;
-                
+
                 for (int j = i; j < temp.length; j++) {
                     endzustaende[i + 1] = temp[i];
                 }
@@ -160,7 +160,28 @@ public class Automat
 
     // remove Endzustand
     public boolean removeEndZustand (int zustand) {
-        return true;
+        if (endzustaende.length == 1) return false;
+
+        for (int i = 0; i < endzustaende.length; i++) {
+            if (endzustaende[i] == zustand){
+                for (int j = i; j < endzustaende.length - 1; j++) {
+                    endzustaende[j] = endzustaende[j + 1];
+                }
+
+                int[] temp = new int[endzustaende.length];
+                for (int j = 0; j < endzustaende.length; j++) {
+                    temp[j] = endzustaende[j];
+                }
+
+                endzustaende = new int[temp.length - 1];
+                for (int j = 0; j < endzustaende.length; j++) {
+                    endzustaende[j] = temp[j];
+                }
+                break;
+            }
+        }
+
+        return false;
     }
 
     // remove a letter from the alphabet

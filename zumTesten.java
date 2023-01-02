@@ -33,6 +33,8 @@ public class zumTesten
             a.toString();
             a.addEndZustand(2);
             a.toString();
+            a.removeEndZustand(3);
+            a.toString();
             //System.out.println(a.gehoertZuSprache("aa")); // true
             //System.out.println(a.gehoertZuSprache("ba")); // true
             //System.out.println(a.gehoertZuSprache("ac")); // true
