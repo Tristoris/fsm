@@ -181,7 +181,7 @@ public class Automat
             }
         }
 
-        return false;
+        return true;
     }
 
     // remove a letter from the alphabet
@@ -212,17 +212,38 @@ public class Automat
 
     // remove Zustand
     public boolean removeZustand (int zustand) {
+        if (zustand == start) return false;
+
         if (uebergangstabelle.length != 1) {
+            if (istEndzustand(zustand)) {
+                if (!removeEndZustand(zustand)) return false;
+            }
 
-        } else return false;
+            int[][] temp = new int[uebergangstabelle.length][uebergangstabelle[0].length];
+            for (int i = 0; i < uebergangstabelle.length; i++) {
+                for (int j = 0; j < uebergangstabelle[0].length; j++) {
+                    temp[i][j] = uebergangstabelle[i][j];
+                }
+            }
 
-        return true;
-    }
+            for (int i = zustand; i < uebergangstabelle.length - 1; i++) {
+                for (int j = 0; j < uebergangstabelle[0].length; j++) {
+                    temp[i][j] = uebergangstabelle[i + 1][j];
+                }
+            }
 
-    // remove Startzustand und setze neuen start
-    public boolean removeStartZustand (int zustand, int start) {
-        if (uebergangstabelle.length != 1) {
+            uebergangstabelle = new int[temp.length - 1][temp[0].length];
+            for (int i = 0; i < uebergangstabelle.length - 1; i++) {
+                for (int j = 0; j < uebergangstabelle[0].length; j++) {
+                    uebergangstabelle[i][j] = temp[i][j];
+                }
+            }
 
+            for (int i = 0; i < uebergangstabelle.length; i++) {
+                for (int j = 0; j < uebergangstabelle[0].length; j++) {
+                    if (uebergangstabelle[i][j] == zustand) uebergangstabelle[i][j] = -1;
+                }
+            }
         } else return false;
 
         return true;
@@ -349,7 +370,7 @@ public class Automat
             for (int i = 0; i < uebergangstabelle.length; i++) {
                 for (int j = 0; j < uebergangstabelle[0].length; j++) {
                     s += "(q" + i + "," + alphabet[j] + ") -> ";
-                    if (uebergangstabelle[i][j] < 0) s += "-";
+                    if (uebergangstabelle[i][j] < 0) s += "--";
                     else s += "q" + uebergangstabelle[i][j];
                     if (j < uebergangstabelle[0].length - 1) s += ", ";
                 }

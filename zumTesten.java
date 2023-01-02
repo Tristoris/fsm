@@ -29,11 +29,11 @@ public class zumTesten
             Automat a = new Automat();
             a.parseXMLtoAutomat("input/configTest.xml");
             //a.removeZustand(3);
-            System.out.println(a.getZustaendeAnzahl()); // 3
+            //System.out.println(a.getZustaendeAnzahl()); // 3
             a.toString();
-            a.addEndZustand(2);
+            a.removeZustand(2);
             a.toString();
-            a.removeEndZustand(3);
+            a.addZustand();
             a.toString();
             //System.out.println(a.gehoertZuSprache("aa")); // true
             //System.out.println(a.gehoertZuSprache("ba")); // true
