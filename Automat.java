@@ -131,6 +131,38 @@ public class Automat
         return true;
     }
 
+    // add an Endzustand
+    public boolean addEndZustand (int zustand) {
+        if ((zustand < 0) || (zustand > uebergangstabelle.length - 1)) return false;
+        if (istEndzustand(zustand)) return false;
+
+        int[] temp = new int[endzustaende.length];
+        for (int i = 0; i < endzustaende.length; i++) {
+            temp[i] = endzustaende[i];
+        }
+
+        endzustaende = new int[temp.length + 1];
+        for (int i = 0; i < endzustaende.length; i++) {
+            if (temp[i] > zustand) {
+                endzustaende[i] = zustand;
+                
+                for (int j = i; j < temp.length; j++) {
+                    endzustaende[i + 1] = temp[i];
+                }
+
+                break;
+            }
+            endzustaende[i] = temp[i];
+        }
+
+        return true;
+    }
+
+    // remove Endzustand
+    public boolean removeEndZustand (int zustand) {
+        return true;
+    }
+
     // remove a letter from the alphabet
     public boolean removeLetter (char letter) {
         if (alphabet.length != 1) {
@@ -157,29 +189,19 @@ public class Automat
         return true;
     }
 
-    // remove a letter from the alphabet
+    // remove Zustand
     public boolean removeZustand (int zustand) {
         if (uebergangstabelle.length != 1) {
-            for (int i = 0; i < uebergangstabelle.length - 1; i++) {
-                if (i == zustand) {
-                    for (int z = i; z < uebergangstabelle.length; z++) {
-                        for (int j = 0; j < uebergangstabelle[0].length; j++) {
-                            uebergangstabelle[z][j] = uebergangstabelle[z + 1][j];
-                        }
 
-                        int[][] temp = new int[uebergangstabelle.length][uebergangstabelle[0].length];
-                        for (int j = 0; j < uebergangstabelle[0].length; j++) {
-                            temp[z][j] = uebergangstabelle[z][j];
-                        }
+        } else return false;
 
-                        uebergangstabelle = new int[temp.length - 1][temp[0].length];
-                        for (int j = 0; j < uebergangstabelle[0].length; j++) {
-                            uebergangstabelle[z][j] = temp[z][j];
-                        }
-                    }
-                    break;
-                }
-            }
+        return true;
+    }
+
+    // remove Startzustand und setze neuen start
+    public boolean removeStartZustand (int zustand, int start) {
+        if (uebergangstabelle.length != 1) {
+
         } else return false;
 
         return true;
