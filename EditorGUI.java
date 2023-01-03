@@ -22,6 +22,7 @@ import javafx.scene.image.Image;
 import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 
 public class EditorGUI extends Application {
     private Controller c;
@@ -69,12 +70,18 @@ public class EditorGUI extends Application {
             specialsBox.getChildren().add(startBox);
             canvas.getChildren().add(buttonBox);
             
-            HBox buttonFlaeche = new HBox();
-            HBox wuerfelFlaeche = new HBox();
+            //set sizes
+            buttonBox.setPrefHeight(100);
+            buttonBox.setAlignment(Pos.BOTTOM_LEFT);
+            endBox.setPrefWidth(115);
+            startBox.setPrefWidth(115);
+            
+            
 
             
             TextField[] alphabet = new TextField[eingabesymbol];
-
+            Label tabellenInfo = new Label("Zustandsübergangstabelle:");
+            
             for (int l=0; l<eingabesymbol; l++){
                 alphabet[l] = new TextField(""+(l));   
                 g.add(alphabet[l], l+1, 0);       
@@ -110,8 +117,7 @@ public class EditorGUI extends Application {
             System.out.println(".getHeight(): " + g.getHeight());
             Scene scene2 = new Scene(canvas,minBreite,minHoehe);
 
-            canvas.getChildren().add(g);
-
+            
             build = new Button("build");
             build.setPrefWidth(feldBreite);
             
@@ -120,23 +126,26 @@ public class EditorGUI extends Application {
             bSnap = new Button("Snapshot");
             bSnap.setPrefWidth(feldBreite);
             bSnap.setOnAction(e -> c.bTakeSnapshot(e,scene2));
-            buttonFlaeche.getChildren().add(bSnap);
             
-            canvas.getChildren().add(buttonFlaeche);
-            canvas.getChildren().add(startInfo);
-           canvas.getChildren().add(startZustand);
-            Label text = new Label("Endzustände");
-            canvas.getChildren().add(text);
+            
+            buttonBox.getChildren().add(build);
+            buttonBox.getChildren().add(bSnap);
+            
+            
+            startBox.getChildren().add(startInfo);
+           startBox.getChildren().add(startZustand);
+            Label endInfo = new Label("Endzustände");
+            endBox.getChildren().add(endInfo);
             CheckBox[] endZustaende = new CheckBox[zustaende];
             for(int y = 0 ;  y < zustaende; y++){
                 endZustaende[y] = new CheckBox("q" + (y));
-                canvas.getChildren().add(endZustaende[y]);
+                endBox.getChildren().add(endZustaende[y]);
                 
             }
             build.setOnAction(e -> c.buildClicked(e,bAutoEintrag,tabelle, alphabet, startZustand, endZustaende));
             build.setDefaultButton(true);
-            buttonFlaeche.getChildren().add(build);
-
+            tabellenBox.getChildren().add(tabellenInfo);
+            tabellenBox.getChildren().add(g);
             
 
 
