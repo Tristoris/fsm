@@ -20,7 +20,7 @@ public class zumTesten
      */
     public zumTesten()
     {
-        testBestanden = new boolean[16];
+        testBestanden = new boolean[15];
 
         testBestanden[0] = xmlTest();
         testBestanden[1] = jsonTest();
@@ -37,7 +37,6 @@ public class zumTesten
         testBestanden[12] = getEndZustaendeTest();
         testBestanden[13] = getAlphabetTest();
         testBestanden[14] = getStartZustandTest();
-        testBestanden[15] = mainTest();
 
         int[] temp = new int[1];
         int counter = 0;
@@ -98,7 +97,24 @@ public class zumTesten
 
     // 1
     private boolean jsonTest () {
-        return false;
+        int[][] table = {{0,0,0},{2,2,0},{3,0,3},{0,0,0}};// = {{0,0,0},{2,2,0},{3,0,3},{0,0,0}};
+        int[] endstate = {3};// = {3};
+        char[] alphabet = {'a', 'b', 'c'};// = {'a', 'b', 'c'};
+        int start = 1;// 1
+        try {
+            Automat a = new Automat();
+            a.parseJSONtoAutomat("testFolder/test01.json");
+
+            if (a.gehoertZuSprache("ab")) return false;
+            if (!a.gehoertZuSprache("aa")) return false;
+            if (a.gehoertZuSprache("aaaa")) return false;
+
+            if(a.parseJSONtoAutomat("testFolder/test02.json")) return false;
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     // 2
@@ -268,7 +284,30 @@ public class zumTesten
 
     // 7
     private boolean removeEndZustandTest () {
-        return false;
+        int[][] table = {{0,0,0},{2,2,0},{3,0,3},{0,0,0}};// = {{0,0,0},{2,2,0},{3,0,3},{0,0,0}};
+        int[] endstate = {3};// = {3};
+        char[] alphabet = {'a', 'b', 'c'};// = {'a', 'b', 'c'};
+        int start = 1;// 1
+
+        try {
+            Automat a = new Automat(table, endstate, alphabet, start);
+            
+            if (a.removeEndZustand(3)) return false;
+            
+            a.addEndZustand(2);
+            
+            if (!(a.getEndZustaende().length == 2)) return false;
+            
+            a.removeEndZustand(3);
+            
+            if (!(a.getEndZustaende().length == 1)) return false;
+            
+            return true;
+        } 
+        catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     // 8
@@ -303,11 +342,6 @@ public class zumTesten
 
     // 14
     private boolean getStartZustandTest () {
-        return false;
-    }
-
-    // 15
-    private boolean mainTest () {
         return false;
     }
 }
