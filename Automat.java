@@ -79,7 +79,7 @@ public class Automat
 
     // change start
     public boolean setStartZustand (int start) {
-        if ((start < 0) || (start > uebergangstabelle.length)) return false;
+        if ((start < 0) || (start > uebergangstabelle.length - 1)) return false;
 
         this.start = start;
 
