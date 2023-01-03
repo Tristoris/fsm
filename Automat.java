@@ -152,7 +152,7 @@ public class Automat
             for (int i = 0; i < temp.length; i++) {
                 endzustaende[i] = temp[i];
             }
-            
+
             endzustaende[endzustaende.length - 1] = zustand;
             return true;
         }
@@ -192,7 +192,7 @@ public class Automat
                 for (int j = 0; j < endzustaende.length; j++) {
                     endzustaende[j] = temp[j];
                 }
-                break;
+                return true;
             }
         }
 
@@ -201,9 +201,34 @@ public class Automat
 
     // remove a letter from the alphabet
     public boolean removeLetter (char letter) {
+        if (indexImAlphabet(letter) == -1) return false;
+        
         if (alphabet.length != 1) {
             for (int i = 0; i < alphabet.length; i++) {
                 if (alphabet[i] == letter) {
+                    // Veraenderung von der uebergangstabelle
+                    int[][] temp1 = new int[uebergangstabelle.length][uebergangstabelle[0].length];
+                    for (int j = 0; j < uebergangstabelle.length; j++) {
+                        for (int z = 0; z < uebergangstabelle[0].length; z++) {
+                            temp1[j][z] = uebergangstabelle[j][z];
+                        }
+                    }
+
+                    for (int j = 0; j < uebergangstabelle.length; j++) {
+                        for (int z = indexImAlphabet(letter); z < uebergangstabelle[0].length - 1; z++) {
+                            temp1[j][z] = uebergangstabelle[j][z + 1];
+                        }
+                    }
+
+                    uebergangstabelle = new int[temp1.length][temp1[0].length - 1];
+                    for (int j = 0; j < uebergangstabelle.length - 1; j++) {
+                        for (int z = 0; z < uebergangstabelle[0].length; z++) {
+                            uebergangstabelle[j][z] = temp1[j][z];
+                        }
+                    }
+
+                    
+                    // verkleinerung vom alphabet und loeschung vom terminalsymbol letter
                     for (int j = i; j < alphabet.length - 1; j++) {
                         alphabet[j] = alphabet[j + 1];
                     }
@@ -217,7 +242,10 @@ public class Automat
                     for (int j = 0; j < alphabet.length; j++) {
                         alphabet[j] = temp[j];
                     }
-                    break;
+
+                    
+                    
+                    return true;
                 }
             }
         } else return false;
@@ -260,6 +288,7 @@ public class Automat
                 }
             }
 
+            // endzustaende um 1 erniedrigen, falls es sein muss
             for (int i = 0; i < endzustaende.length; i++) {
                 if (zustand < endzustaende[i]) endzustaende[i]--;
             }

@@ -312,7 +312,36 @@ public class zumTesten
 
     // 8
     private boolean removeLetterTest () {
-        return false;
+        int[][] table = {{0,0,0},{2,2,0},{3,0,3},{0,0,0}};// = {{0,0,0},{2,2,0},{3,0,3},{0,0,0}};
+        int[] endstate = {3};// = {3};
+        char[] alphabet = {'a', 'b', 'c'};// = {'a', 'b', 'c'};
+        int start = 1;// 1
+
+        try {
+            Automat a = new Automat(table, endstate, alphabet, start);
+
+            a.removeLetter('a');
+            
+            //System.out.println(a.toString());
+            
+            if (a.gehoertZuSprache("aa")) return false;
+            
+            if (!a.gehoertZuSprache("bc")) return false;
+            
+            if (a.removeLetter('a')) return false;
+            
+            a.removeLetter('b');
+            
+            a.addEndZustand(2);
+            
+            if (a.gehoertZuSprache("b")) return false;
+
+            return true;
+        } 
+        catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     // 9
