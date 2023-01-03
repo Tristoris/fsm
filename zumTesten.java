@@ -83,11 +83,11 @@ public class zumTesten
         try {
             Automat a = new Automat();
             a.parseXMLtoAutomat("testFolder/test01.xml");
-            
+
             if (a.gehoertZuSprache("ab")) return false;
             if (!a.gehoertZuSprache("aa")) return false;
             if (a.gehoertZuSprache("aaaa")) return false;
-            
+
             if(a.parseXMLtoAutomat("testFolder/test02.xml")) return false;
             return true;
         } catch (Exception e) {
@@ -103,7 +103,36 @@ public class zumTesten
 
     // 2
     private boolean gehoertZuSpracheTest () {
-        return false;
+        int[][] table = {{0,0,0},{2,2,0},{3,0,3},{0,0,0}};// = {{0,0,0},{2,2,0},{3,0,3},{0,0,0}};
+        int[] endstate = {3};// = {3};
+        char[] alphabet = {'a', 'b', 'c'};// = {'a', 'b', 'c'};
+        int start = 1;// 1
+
+        try {
+            Automat a = new Automat(table, endstate, alphabet, start);
+            
+            if (!a.gehoertZuSprache("aa")) return false;
+            if (!a.gehoertZuSprache("ac")) return false;
+            if (!a.gehoertZuSprache("ba")) return false;
+            if (!a.gehoertZuSprache("bc")) return false;
+            if (a.gehoertZuSprache("")) return false;
+            if (a.gehoertZuSprache("ab")) return false;
+            if (a.gehoertZuSprache("abc")) return false;
+            if (a.gehoertZuSprache("acb")) return false;
+            if (a.gehoertZuSprache("d")) return false;
+            if (a.gehoertZuSprache("bac")) return false;
+            
+            a = new Automat();
+            
+            if (!a.gehoertZuSprache("")) return false;
+            if (a.gehoertZuSprache("0")) return false;
+            
+            return true;
+        } 
+        catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     // 3
