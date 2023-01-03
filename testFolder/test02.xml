@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<table>
+		<state>
+			<nextState>0</nextState>
+			<nextState>0</nextState>
+			<nextState>0</nextState>
+		</state>
+		<state>
+			<nextState>2</nextState>
+			<nextState>2</nextState>
+			<nextState>0</nextState>
+		</state>
+		<state>
+			<nextState>3</nextState>
+			<nextState>0</nextState>
+			<nextState>3</nextState>
+		</state>
+	</table>
+	
+	<endState>
+		<state>3</state>
+	</endState>
+	
+	<alphabet>
+		<char>a</char>
+		<char>b</char>
+		<char>c</char>
+	</alphabet>
+	
+	<start>1</start>
+</config> 

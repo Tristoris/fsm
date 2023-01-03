@@ -35,7 +35,7 @@ public class xmlConfig extends Config
 
             Element config = doc.getDocumentElement();
             //System.out.println(config.getNodeName()); // config
-            NodeList fsl = config.getElementsByTagName("fsl");
+            NodeList fsl = config.getElementsByTagName("table");
             NodeList endStateXML = config.getElementsByTagName("endState");
             NodeList alphabetXML = config.getElementsByTagName("alphabet");
             NodeList startXML = config.getElementsByTagName("start");
@@ -118,7 +118,7 @@ public class xmlConfig extends Config
             doc.appendChild(rootElement);
 
             // fsl element
-            Element fslEl = doc.createElement("fsl");
+            Element fslEl = doc.createElement("table");
             rootElement.appendChild(fslEl);
 
             for (int i = 0; i < uebergangstabelle.length; i++) {

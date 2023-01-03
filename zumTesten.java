@@ -10,10 +10,10 @@ public class zumTesten
     // instance variables - replace the example below with your own
     private boolean[] testBestanden;
 
-    int[][] fsl;// = {{0,0,0},{2,2,0},{3,0,3},{0,0,0}};
-    int[] endstate;// = {3};
-    char[] alphabet;// = {'a', 'b', 'c'};
-    int start;// 1
+    //int[][] table;// = {{0,0,0},{2,2,0},{3,0,3},{0,0,0}};
+    //int[] endstate;// = {3};
+    //char[] alphabet;// = {'a', 'b', 'c'};
+    //int start;// 1
 
     /**
      * Konstruktor fuer die Test-Klasse testKlasse
@@ -49,14 +49,14 @@ public class zumTesten
             else 
             {
                 if (counter == temp.length) {
-                    int[] temptemp = new int[temp.length];
-                    for (int j = 0; j < temp.length; j++) {
-                        temptemp[i] = temp[i];
+                    int[] temp1 = new int[temp.length];
+                    for (int j = 0; j < temp1.length; j++) {
+                        temp1[j] = temp[j];
                     }
-                    
-                    temp = new int[temptemp.length + 1];
-                    for (int j = 0; j < temptemp.length; j++) {
-                        temp[i] = temptemp[i];
+
+                    temp = new int[temp1.length + 1];
+                    for (int j = 0; j < temp1.length; j++) {
+                        temp[j] = temp1[j];
                     }
                 }
                 temp[counter] = i;
@@ -76,7 +76,24 @@ public class zumTesten
 
     // 0
     private boolean xmlTest () {
-        return false;
+        int[][] table = {{0,0,0},{2,2,0},{3,0,3},{0,0,0}};// = {{0,0,0},{2,2,0},{3,0,3},{0,0,0}};
+        int[] endstate = {3};// = {3};
+        char[] alphabet = {'a', 'b', 'c'};// = {'a', 'b', 'c'};
+        int start = 1;// 1
+        try {
+            Automat a = new Automat();
+            a.parseXMLtoAutomat("testFolder/test01.xml");
+            
+            if (a.gehoertZuSprache("ab")) return false;
+            if (!a.gehoertZuSprache("aa")) return false;
+            if (a.gehoertZuSprache("aaaa")) return false;
+            
+            if(!a.parseXMLtoAutomat("testFolder/test02.xml"))return false;
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     // 1

@@ -266,7 +266,7 @@ public class Automat
     public boolean parseXMLtoAutomat (String filePath) {
         xmlConfig xmlcon;
         xmlcon = new xmlConfig();
-        xmlcon.readFile("input/configTest.xml");
+        xmlcon.readFile(filePath);
 
         int[][] tempUebergangstabelle = xmlcon.getUebergangstabelle();
         int[] tempEndzustaende = xmlcon.getEndzustaende();
