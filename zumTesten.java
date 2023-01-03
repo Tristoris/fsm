@@ -88,7 +88,7 @@ public class zumTesten
             if (!a.gehoertZuSprache("aa")) return false;
             if (a.gehoertZuSprache("aaaa")) return false;
             
-            if(!a.parseXMLtoAutomat("testFolder/test02.xml"))return false;
+            if(a.parseXMLtoAutomat("testFolder/test02.xml")) return false;
             return true;
         } catch (Exception e) {
             e.printStackTrace();
