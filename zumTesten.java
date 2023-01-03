@@ -13,7 +13,7 @@ public class zumTesten
     int[][] fsl;// = {{0,0,0},{2,2,0},{3,0,3},{0,0,0}};
     int[] endstate;// = {3};
     char[] alphabet;// = {'a', 'b', 'c'};
-    int start;
+    int start;// 1
     private Automat automat1;
 
     private xmlConfig xmlcon;
@@ -23,28 +23,6 @@ public class zumTesten
      */
     public zumTesten()
     {
-        xmlcon = new xmlConfig();
-
-        try {
-            Automat a = new Automat();
-            a.parseXMLtoAutomat("input/configTest.xml");
-            //a.removeZustand(3);
-            //System.out.println(a.getZustaendeAnzahl()); // 3
-            a.toString();
-            a.removeZustand(2);
-            a.toString();
-            a.addZustand();
-            a.toString();
-            //System.out.println(a.gehoertZuSprache("aa")); // true
-            //System.out.println(a.gehoertZuSprache("ba")); // true
-            //System.out.println(a.gehoertZuSprache("ac")); // true
-            //System.out.println(a.gehoertZuSprache("bc")); // true
-            //System.out.println(a.gehoertZuSprache("abc")); // false
-            //System.out.println(a.gehoertZuSprache("")); // false
-            //System.out.println(a.gehoertZuSprache("ab")); // false
-            //System.out.println(a.parseAutomatToXML("output/configOutputTest.xml")); // true
-        }
-        catch (Exception e) {e.printStackTrace();}
-
+        
     }
 }
