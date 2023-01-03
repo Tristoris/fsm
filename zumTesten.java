@@ -322,7 +322,33 @@ public class zumTesten
 
     // 10
     private boolean setUebergangTest () {
-        return false;
+        int[][] table = {{0,0,0},{2,2,0},{3,0,3},{0,0,0}};// = {{0,0,0},{2,2,0},{3,0,3},{0,0,0}};
+        int[] endstate = {3};// = {3};
+        char[] alphabet = {'a', 'b', 'c'};// = {'a', 'b', 'c'};
+        int start = 1;// 1
+
+        try {
+            Automat a = new Automat(table, endstate, alphabet, start);
+
+            a.setUebergang(0, 3, 'a');
+            
+            if (!a.gehoertZuSprache("aa")) return false;
+            if (!a.gehoertZuSprache("ac")) return false;
+            if (!a.gehoertZuSprache("ba")) return false;
+            if (!a.gehoertZuSprache("bc")) return false;
+            if (a.gehoertZuSprache("")) return false;
+            if (a.gehoertZuSprache("ab")) return false;
+            if (!a.gehoertZuSprache("aaaa")) return false;
+            if (!a.gehoertZuSprache("acba")) return false;
+            if (a.gehoertZuSprache("acbb")) return false;
+            if (a.gehoertZuSprache("bac")) return false;
+
+            return true;
+        } 
+        catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     // 11
@@ -347,28 +373,26 @@ public class zumTesten
 
             char[] temp = a.getAlphabet();
             
-
-            if (!(temp[0] == 'a')) System.out.println("1");;
-            if (!(temp[1] == 'b')) System.out.println("2");;
-            if (!(temp[2] == 'c')) System.out.println("3");;
+            if (!(temp[0] == 'a')) return false;
+            if (!(temp[1] == 'b')) return false;
+            if (!(temp[2] == 'c')) return false;
             
             a.addLetter('e');
 
             temp = a.getAlphabet();
             
-            for (int i = 0; i < temp.length; i++) System.out.println(temp[i]);
 
-            if (!(temp[0] == 'a')) System.out.println("4");;
-            if (!(temp[1] == 'b')) System.out.println("5");;
-            if (!(temp[2] == 'c')) System.out.println("6");;
-            if (!(temp[3] == 'e')) System.out.println("7");;
+            if (!(temp[0] == 'a')) return false;
+            if (!(temp[1] == 'b')) return false;
+            if (!(temp[2] == 'c')) return false;
+            if (!(temp[3] == 'e')) return false;
 
             a.removeLetter('a');
             
             temp = a.getAlphabet();
 
-            if (!(temp[0] == 'b')) System.out.println("8");;
-            if (!(temp[1] == 'c')) System.out.println("9");;
+            if (!(temp[0] == 'b')) return false;
+            if (!(temp[1] == 'c')) return false;
             if (!(temp[2] == 'e')) return false;
 
             return true;

@@ -265,7 +265,7 @@ public class Automat
 
         uebergangstabelle[node1][index] = node2;
 
-        return false;
+        return true;
     }
 
     public boolean parseXMLtoAutomat (String filePath) {
