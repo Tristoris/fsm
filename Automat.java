@@ -54,7 +54,7 @@ public class Automat
 
     // Sagt ob "zustand" ein Endzustand ist oder nicht
     private boolean istEndzustand (int zustand) {
-        if ((endzustaende == null) || (zustand < 0)) return false;
+        if (zustand < 0) return false;
         for (int i = 0; i < endzustaende.length; i++) {
             if (zustand == endzustaende[i]) return true;
         }
@@ -79,6 +79,7 @@ public class Automat
 
     // change start
     public boolean setStartZustand (int start) {
+        // setze einen neuen startzustand, falls der zustand start valid ist
         if ((start < 0) || (start > uebergangstabelle.length - 1)) return false;
 
         this.start = start;
@@ -88,6 +89,7 @@ public class Automat
 
     // add zustand and return zustandAnzahl
     public int addZustand () {
+        // erweiterung der uebergangstabelle von hinten
         int[][] temp = new int[uebergangstabelle.length][uebergangstabelle[0].length];
         for (int i = 0; i < uebergangstabelle.length; i++) {
             for (int j = 0; j < uebergangstabelle[0].length; j++) {
@@ -165,8 +167,9 @@ public class Automat
             temp[i] = endzustaende[i];
         }
 
+        
         endzustaende = new int[temp.length + 1];
-
+        // if selected zustand biggest state, then just add it at the end
         if (zustand > temp[temp.length - 1]) {
             for (int i = 0; i < temp.length; i++) {
                 endzustaende[i] = temp[i];
@@ -175,7 +178,8 @@ public class Automat
             endzustaende[endzustaende.length - 1] = zustand;
             return true;
         }
-
+        
+        // else put it in the middle and make others move one to the right
         for (int i = 0; i < temp.length; i++) {
             if (temp[i] > zustand) {
                 endzustaende[i] = zustand;
