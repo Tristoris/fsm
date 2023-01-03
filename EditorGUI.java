@@ -53,6 +53,24 @@ public class EditorGUI extends Application {
             ta.setPrefRowCount(4);
             Controller c = new Controller(g,ta,eingabesymbol);
             c.meldeGUIAn(this);
+            
+            //structure components
+            VBox canvas = new VBox();
+                VBox tabellenBox = new VBox();
+                HBox specialsBox = new HBox();
+                    VBox endBox = new VBox();
+                    VBox startBox = new VBox();
+                HBox buttonBox = new HBox();
+            
+            // structure window
+            canvas.getChildren().add(tabellenBox);
+            canvas.getChildren().add(specialsBox);
+            specialsBox.getChildren().add(endBox);
+            specialsBox.getChildren().add(startBox);
+            canvas.getChildren().add(buttonBox);
+            
+            HBox buttonFlaeche = new HBox();
+            HBox wuerfelFlaeche = new HBox();
 
             
             TextField[] alphabet = new TextField[eingabesymbol];
@@ -76,26 +94,23 @@ public class EditorGUI extends Application {
             final int initialValue = 0;
             Label startInfo = new Label("Startzustand");
             Spinner startZustand = new Spinner();
-            SpinnerValueFactory<Integer> valueFactory = //
-            new SpinnerValueFactory.IntegerSpinnerValueFactory(0, zustaende - 1, initialValue);
+            SpinnerValueFactory<Integer> valueFactory =  new SpinnerValueFactory.IntegerSpinnerValueFactory(0, zustaende - 1, initialValue);
             startZustand.setValueFactory(valueFactory);
+            
+            //define appearance of grid
             g.setGridLinesVisible(true);
-            // FXMLLoader loader = new FXMLLoader(getClass().getResource("view/KniffelGUI.fxml"));
-            VBox spiel = new VBox();
-            HBox buttonFlaeche = new HBox();
-            HBox wuerfelFlaeche = new HBox();
-
             g.setPadding(new Insets(5));
             g.setPrefSize((eingabesymbol+1)*feldBreite+10, 350);
-            // g.setHgrow(root, Priority.NEVER);
+            
+            int minHoehe = (zustaende*80) + 100;
             int minBreite = (eingabesymbol+1)*feldBreite;
             if(minBreite<250) minBreite = 250;
-
+            //int minHoehe =
             ta.setPrefWidth(minBreite);
+            System.out.println(".getHeight(): " + g.getHeight());
+            Scene scene2 = new Scene(canvas,minBreite,minHoehe);
 
-            Scene scene2 = new Scene(spiel,900,900);
-
-            spiel.getChildren().add(g);
+            canvas.getChildren().add(g);
 
             build = new Button("build");
             build.setPrefWidth(feldBreite);
@@ -106,16 +121,16 @@ public class EditorGUI extends Application {
             bSnap.setPrefWidth(feldBreite);
             bSnap.setOnAction(e -> c.bTakeSnapshot(e,scene2));
             buttonFlaeche.getChildren().add(bSnap);
-
-            spiel.getChildren().add(buttonFlaeche);
-            spiel.getChildren().add(startInfo);
-           spiel.getChildren().add(startZustand);
+            
+            canvas.getChildren().add(buttonFlaeche);
+            canvas.getChildren().add(startInfo);
+           canvas.getChildren().add(startZustand);
             Label text = new Label("Endzustände");
-            spiel.getChildren().add(text);
+            canvas.getChildren().add(text);
             CheckBox[] endZustaende = new CheckBox[zustaende];
             for(int y = 0 ;  y < zustaende; y++){
                 endZustaende[y] = new CheckBox("q" + (y));
-                spiel.getChildren().add(endZustaende[y]);
+                canvas.getChildren().add(endZustaende[y]);
                 
             }
             build.setOnAction(e -> c.buildClicked(e,bAutoEintrag,tabelle, alphabet, startZustand, endZustaende));
@@ -130,7 +145,6 @@ public class EditorGUI extends Application {
             primaryStage.setTitle("Automaten Editor - Konfiguration");
             primaryStage.centerOnScreen();
             primaryStage.setAlwaysOnTop(false);
-            primaryStage.setHeight(400);
             primaryStage.setOnCloseRequest(event ->
                 {
                     System.out.print('\u000C'); // Loescht die Konsolenausgabe
