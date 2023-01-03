@@ -171,7 +171,32 @@ public class zumTesten
 
     // 4
     private boolean addZustandTest () {
-        return false;
+        int[][] table = {{0,0,0},{2,2,0},{3,0,3},{0,0,0}};// = {{0,0,0},{2,2,0},{3,0,3},{0,0,0}};
+        int[] endstate = {3};// = {3};
+        char[] alphabet = {'a', 'b', 'c'};// = {'a', 'b', 'c'};
+        int start = 1;// 1
+
+        try {
+            Automat a = new Automat(table, endstate, alphabet, start);
+            
+            a.addZustand();
+            
+            if (!(a.getZustaendeAnzahl() == 5)) return false;
+            
+            a.removeZustand(0);
+            
+            a.removeZustand(4);
+            
+            a.addZustand();
+            
+            if (!(a.getZustaendeAnzahl() == 4)) return false;
+            
+            return true;
+        } 
+        catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     // 5
