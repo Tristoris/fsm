@@ -20,6 +20,8 @@ public class zumTesten
      */
     public zumTesten()
     {
+        testBestanden = new boolean[76];
+        
         testBestanden[0] = xmlTest();
         testBestanden[1] = jsonTest();
         testBestanden[2] = gehoertZuSpracheTest();
@@ -27,39 +29,63 @@ public class zumTesten
         testBestanden[4] = addZustandTest();
         testBestanden[5] = addLetterTest();
         testBestanden[6] = addEndZustandTest();
+        testBestanden[7] = removeEndZustandTest();
+        testBestanden[8] = removeLetterTest();
+        testBestanden[9] = removeZustandTest();
+        
+        for (int i = 0; i < testBestanden.length; i++) {
+            if (testBestanden[i]) System.out.println("bestanden " + i);
+            else System.out.println("nicht bestanden " + i);
+        }
     }
-    
+
     // 0
-    public boolean xmlTest () {
+    private boolean xmlTest () {
         return false;
     }
-    
+
     // 1
-    public boolean jsonTest () {
+    private boolean jsonTest () {
         return false;
     }
-    
+
     // 2
-    public boolean gehoertZuSpracheTest () {
+    private boolean gehoertZuSpracheTest () {
         return false;
     }
-    
+
     // 3
-    public boolean setStartZustandTest () {
+    private boolean setStartZustandTest () {
         return false;
     }
-    
+
     // 4
-    public boolean addZustandTest () {
+    private boolean addZustandTest () {
         return false;
     }
-    
+
     // 5
-    public boolean addLetterTest () {
+    private boolean addLetterTest () {
+        return false;
+    }
+
+    // 6
+    private boolean addEndZustandTest () {
+        return false;
+    }
+
+    // 7
+    private boolean removeEndZustandTest () {
         return false;
     }
     
-    public boolean addEndZustandTest () {
+    // 8
+    private boolean removeLetterTest () {
+        return false;
+    }
+    
+    // 9
+    private boolean removeZustandTest () {
         return false;
     }
 }
