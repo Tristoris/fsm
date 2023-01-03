@@ -249,6 +249,13 @@ public class Automat
                     if (uebergangstabelle[i][j] == zustand) uebergangstabelle[i][j] = -1;
                 }
             }
+            
+            for (int i = 0; i < endzustaende.length; i++) {
+                if (zustand < endzustaende[i]) endzustaende[i]--;
+            }
+            
+            start--;
+            
         } else return false;
 
         return true;

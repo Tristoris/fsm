@@ -353,7 +353,38 @@ public class zumTesten
 
     // 11
     private boolean getZustaendeAnzahlTest () {
-        return false;
+        int[][] table = {{0,0,0},{2,2,0},{3,0,3},{0,0,0}};// = {{0,0,0},{2,2,0},{3,0,3},{0,0,0}};
+        int[] endstate = {3};// = {3};
+        char[] alphabet = {'a', 'b', 'c'};// = {'a', 'b', 'c'};
+        int start = 1;// 1
+
+        try {
+            Automat a = new Automat(table, endstate, alphabet, start);
+
+            if (!(a.getZustaendeAnzahl() == 4)) return false;
+            
+            a.addZustand();
+            
+            if (!(a.getZustaendeAnzahl() == 5)) return false;
+            
+            a.addZustand();
+            
+            if (!(a.getZustaendeAnzahl() == 6)) return false;
+            
+            a.removeZustand(0);
+            a.removeZustand(1);
+            a.removeZustand(3);
+            
+            if (!(a.getZustaendeAnzahl() == 3)) return false;
+            
+            if (!(a.getEndZustaende()[0] == 1)) return false;
+
+            return true;
+        } 
+        catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     // 12
