@@ -117,12 +117,12 @@ public class Automat
 
         // Erweiterung vom Alphabet
         char[] temp = new char[alphabet.length];
-        for (int i = 0; i < alphabet.length; i++) {
+        for (int i = 0; i < alphabet.length - 1; i++) {
             temp[i] = alphabet[i];
         }
 
         alphabet = new char[temp.length + 1];
-        for (int i = 0; i < alphabet.length; i++) {
+        for (int i = 0; i < alphabet.length - 1; i++) {
             alphabet[i] = temp[i];
         }
 

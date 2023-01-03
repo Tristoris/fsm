@@ -201,7 +201,26 @@ public class zumTesten
 
     // 5
     private boolean addLetterTest () {
-        return false;
+        int[][] table = {{0,0,0},{2,2,0},{3,0,3},{0,0,0}};// = {{0,0,0},{2,2,0},{3,0,3},{0,0,0}};
+        int[] endstate = {3};// = {3};
+        char[] alphabet = {'a', 'b', 'c'};// = {'a', 'b', 'c'};
+        int start = 1;// 1
+
+        try {
+            Automat a = new Automat(table, endstate, alphabet, start);
+            
+            a.addLetter('d');
+            
+            if (!(a.getAlphabet()[a.getAlphabet().length - 1] == 'd')) return false;
+            
+            if (a.addLetter('d')) return false;
+            
+            return true;
+        } 
+        catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     // 6
