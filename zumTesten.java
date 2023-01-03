@@ -354,7 +354,19 @@ public class zumTesten
         try {
             Automat a = new Automat(table, endstate, alphabet, start);
 
+            a.removeZustand(0);
             
+            if (!a.gehoertZuSprache("aa")) return false;
+            
+            if (a.gehoertZuSprache("cb")) return false;
+            
+            a.addZustand();
+            
+            a.addEndZustand(3);
+            
+            a.setUebergang(0, 3, 'a');
+            
+            if (!a.gehoertZuSprache("a")) return false;
             
             return true;
         } 

@@ -72,6 +72,7 @@ public class Automat
             index = indexImAlphabet(wort.charAt(i));
             if (index < 0) return false;
             zustand = uebergangstabelle[zustand][index];
+            if (zustand < 0) return false;
         }
 
         return istEndzustand(zustand);
@@ -325,7 +326,7 @@ public class Automat
                 if (zustand < endzustaende[i]) endzustaende[i]--;
             }
 
-            start--;
+            if (zustand < start) start--;
 
             return true;
         } else return false;
