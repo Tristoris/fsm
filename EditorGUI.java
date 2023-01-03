@@ -40,6 +40,8 @@ public class EditorGUI extends Application {
     private final int labelBreite = 110;
     
     private int zustaende;
+    private Button cJson;
+    private Button cXml;
     public EditorGUI(int eingabesymbol, int zustaende){
         this.eingabesymbol = eingabesymbol;
         this.zustaende = zustaende;
@@ -111,10 +113,8 @@ public class EditorGUI extends Application {
             
             int minHoehe = (zustaende*80) + 100;
             int minBreite = (eingabesymbol+1)*feldBreite;
-            if(minBreite<250) minBreite = 250;
-            //int minHoehe =
+            if(minBreite<300) minBreite = 300;
             ta.setPrefWidth(minBreite);
-            System.out.println(".getHeight(): " + g.getHeight());
             Scene scene2 = new Scene(canvas,minBreite,minHoehe);
 
             
@@ -127,9 +127,20 @@ public class EditorGUI extends Application {
             bSnap.setPrefWidth(feldBreite);
             bSnap.setOnAction(e -> c.bTakeSnapshot(e,scene2));
             
+            cJson = new Button("to json");
+            cJson.setPrefWidth(feldBreite);
+            cJson.setOnAction(e -> c.toJson());
+            
+            cXml = new Button("to xml");
+            cXml.setPrefWidth(feldBreite);
+            cXml.setOnAction(e -> c.toXml());
+            
+            
             
             buttonBox.getChildren().add(build);
             buttonBox.getChildren().add(bSnap);
+            buttonBox.getChildren().add(cJson);
+            buttonBox.getChildren().add(cXml);
             
             
             startBox.getChildren().add(startInfo);

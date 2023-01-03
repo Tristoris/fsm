@@ -48,7 +48,12 @@ public class Controller {
 
         // buttonListeAktiverPlayerSetzen();
     }
-
+    public void toJson(){
+    //gets called when to json Button was pressed
+    }
+    public void toXml(){
+    //gets called when to xml Button was pressed
+    }
     void bLosClicked(Event event, Spinner tf,Spinner tfd) {
         try{
             Integer zahl =(int) tf.getValue();
