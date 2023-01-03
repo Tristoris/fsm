@@ -96,8 +96,8 @@ public class Automat
         }
 
         uebergangstabelle = new int[temp.length + 1][temp[0].length];
-        for (int i = 0; i < uebergangstabelle.length - 1; i++) {
-            for (int j = 0; j < uebergangstabelle[0].length; j++) {
+        for (int i = 0; i < temp.length; i++) {
+            for (int j = 0; j < temp[0].length; j++) {
                 uebergangstabelle[i][j] = temp[i][j];
             }
         }
@@ -117,12 +117,12 @@ public class Automat
 
         // Erweiterung vom Alphabet
         char[] temp = new char[alphabet.length];
-        for (int i = 0; i < alphabet.length - 1; i++) {
+        for (int i = 0; i < temp.length; i++) {
             temp[i] = alphabet[i];
         }
 
         alphabet = new char[temp.length + 1];
-        for (int i = 0; i < alphabet.length - 1; i++) {
+        for (int i = 0; i < temp.length; i++) {
             alphabet[i] = temp[i];
         }
 

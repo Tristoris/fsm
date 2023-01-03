@@ -351,7 +351,7 @@ public class zumTesten
             if (!(temp[0] == 'a')) System.out.println("1");;
             if (!(temp[1] == 'b')) System.out.println("2");;
             if (!(temp[2] == 'c')) System.out.println("3");;
-
+            
             a.addLetter('e');
 
             temp = a.getAlphabet();
