@@ -49,7 +49,7 @@ public class Controller {
         // buttonListeAktiverPlayerSetzen();
     }
 
-    void bLosClicked(Event event, Spinner tf,Spinner tfd, TextArea l) {
+    void bLosClicked(Event event, Spinner tf,Spinner tfd) {
         try{
             Integer zahl =(int) tf.getValue();
             if(zahl>0){
@@ -62,7 +62,6 @@ public class Controller {
 
         }
         catch(NumberFormatException e){
-            l.setText("Information:\nDie eingegebene Zahl muss eine int Zahl größer als 0 sein !");
         }
     }
 
