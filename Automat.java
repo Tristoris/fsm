@@ -128,6 +128,25 @@ public class Automat
 
         alphabet[alphabet.length - 1] = letter;
 
+        // erweiterung von der uebergangstabelle
+        int[][] temp1 = new int[uebergangstabelle.length][uebergangstabelle[0].length];
+        for (int i = 0; i < uebergangstabelle.length; i++) {
+            for (int j = 0; j < uebergangstabelle[0].length; j++) {
+                temp1[i][j] = uebergangstabelle[i][j];
+            }
+        }
+
+        uebergangstabelle = new int[temp1.length][temp1[0].length + 1];
+        for (int i = 0; i < temp1.length; i++) {
+            for (int j = 0; j < temp1[0].length; j++) {
+                uebergangstabelle[i][j] = temp1[i][j];
+            }
+        }
+
+        for (int i = 0; i < uebergangstabelle.length; i++) {
+            uebergangstabelle[i][uebergangstabelle[0].length - 1] = -1;
+        }
+
         return true;
     }
 
@@ -202,7 +221,7 @@ public class Automat
     // remove a letter from the alphabet
     public boolean removeLetter (char letter) {
         if (indexImAlphabet(letter) == -1) return false;
-        
+
         if (alphabet.length != 1) {
             for (int i = 0; i < alphabet.length; i++) {
                 if (alphabet[i] == letter) {
@@ -227,7 +246,6 @@ public class Automat
                         }
                     }
 
-                    
                     // verkleinerung vom alphabet und loeschung vom terminalsymbol letter
                     for (int j = i; j < alphabet.length - 1; j++) {
                         alphabet[j] = alphabet[j + 1];
@@ -243,7 +261,6 @@ public class Automat
                         alphabet[j] = temp[j];
                     }
 
-                    
                     
                     return true;
                 }
