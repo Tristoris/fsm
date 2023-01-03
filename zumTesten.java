@@ -321,21 +321,21 @@ public class zumTesten
             Automat a = new Automat(table, endstate, alphabet, start);
 
             a.removeLetter('a');
-            
-            //System.out.println(a.toString());
-            
+
             if (a.gehoertZuSprache("aa")) return false;
-            
+
             if (!a.gehoertZuSprache("bc")) return false;
-            
+
             if (a.removeLetter('a')) return false;
-            
+
             a.removeLetter('b');
-            
+
             a.addEndZustand(2);
-            
+
             if (a.gehoertZuSprache("b")) return false;
 
+            a.addLetter('e');
+            
             return true;
         } 
         catch (Exception e) {
@@ -346,7 +346,22 @@ public class zumTesten
 
     // 9
     private boolean removeZustandTest () {
-        return false;
+        int[][] table = {{0,0,0},{2,2,0},{3,0,3},{0,0,0}};// = {{0,0,0},{2,2,0},{3,0,3},{0,0,0}};
+        int[] endstate = {3};// = {3};
+        char[] alphabet = {'a', 'b', 'c'};// = {'a', 'b', 'c'};
+        int start = 1;// 1
+
+        try {
+            Automat a = new Automat(table, endstate, alphabet, start);
+
+            
+            
+            return true;
+        } 
+        catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     // 10
@@ -360,7 +375,7 @@ public class zumTesten
             Automat a = new Automat(table, endstate, alphabet, start);
 
             a.setUebergang(0, 3, 'a');
-            
+
             if (!a.gehoertZuSprache("aa")) return false;
             if (!a.gehoertZuSprache("ac")) return false;
             if (!a.gehoertZuSprache("ba")) return false;
@@ -391,21 +406,21 @@ public class zumTesten
             Automat a = new Automat(table, endstate, alphabet, start);
 
             if (!(a.getZustaendeAnzahl() == 4)) return false;
-            
+
             a.addZustand();
-            
+
             if (!(a.getZustaendeAnzahl() == 5)) return false;
-            
+
             a.addZustand();
-            
+
             if (!(a.getZustaendeAnzahl() == 6)) return false;
-            
+
             a.removeZustand(0);
             a.removeZustand(1);
             a.removeZustand(3);
-            
+
             if (!(a.getZustaendeAnzahl() == 3)) return false;
-            
+
             if (!(a.getEndZustaende()[0] == 1)) return false;
 
             return true;
@@ -427,27 +442,27 @@ public class zumTesten
             Automat a = new Automat(table, endstate, alphabet, start);
 
             a.addEndZustand(2);
-            
-            if (!(a.getEndZustaende()[0] == 2)) return false;
-            
-            if (!(a.getEndZustaende()[1] == 3)) return false;
-            
-            if (a.addEndZustand(2)) return false;
-            
-            if (!a.gehoertZuSprache("a")) return false;
-            
-            a.removeEndZustand(3);
-            
-            if (!(a.getEndZustaende()[0] == 2)) return false;
-            
-            if (a.gehoertZuSprache("aa")) return false;
-            
-            a.addEndZustand(3);
-            
+
             if (!(a.getEndZustaende()[0] == 2)) return false;
 
             if (!(a.getEndZustaende()[1] == 3)) return false;
-            
+
+            if (a.addEndZustand(2)) return false;
+
+            if (!a.gehoertZuSprache("a")) return false;
+
+            a.removeEndZustand(3);
+
+            if (!(a.getEndZustaende()[0] == 2)) return false;
+
+            if (a.gehoertZuSprache("aa")) return false;
+
+            a.addEndZustand(3);
+
+            if (!(a.getEndZustaende()[0] == 2)) return false;
+
+            if (!(a.getEndZustaende()[1] == 3)) return false;
+
             return true;
         } 
         catch (Exception e) {
@@ -467,15 +482,14 @@ public class zumTesten
             Automat a = new Automat(table, endstate, alphabet, start);
 
             char[] temp = a.getAlphabet();
-            
+
             if (!(temp[0] == 'a')) return false;
             if (!(temp[1] == 'b')) return false;
             if (!(temp[2] == 'c')) return false;
-            
+
             a.addLetter('e');
 
             temp = a.getAlphabet();
-            
 
             if (!(temp[0] == 'a')) return false;
             if (!(temp[1] == 'b')) return false;
@@ -483,7 +497,7 @@ public class zumTesten
             if (!(temp[3] == 'e')) return false;
 
             a.removeLetter('a');
-            
+
             temp = a.getAlphabet();
 
             if (!(temp[0] == 'b')) return false;

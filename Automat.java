@@ -304,6 +304,12 @@ public class Automat
                     if (uebergangstabelle[i][j] == zustand) uebergangstabelle[i][j] = -1;
                 }
             }
+            
+            for (int i = 0; i < uebergangstabelle.length; i++) {
+                for (int j = 0; j < uebergangstabelle[0].length; j++) {
+                    if (uebergangstabelle[i][j] > zustand) uebergangstabelle[i][j]--;
+                }
+            }
 
             // endzustaende um 1 erniedrigen, falls es sein muss
             for (int i = 0; i < endzustaende.length; i++) {
