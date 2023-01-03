@@ -135,7 +135,7 @@ public class Automat
     public boolean addEndZustand (int zustand) {
         if ((zustand < 0) || (zustand > uebergangstabelle.length - 1)) return false;
         if (istEndzustand(zustand)) return false;
-        
+
         // check if endzustand exists
         for (int i = 0; i < endzustaende.length; i++) {
             if (endzustaende[i] == zustand) return false;
@@ -147,6 +147,16 @@ public class Automat
         }
 
         endzustaende = new int[temp.length + 1];
+
+        if (zustand > temp[temp.length - 1]) {
+            for (int i = 0; i < temp.length; i++) {
+                endzustaende[i] = temp[i];
+            }
+            
+            endzustaende[endzustaende.length - 1] = zustand;
+            return true;
+        }
+
         for (int i = 0; i < temp.length; i++) {
             if (temp[i] > zustand) {
                 endzustaende[i] = zustand;
@@ -155,7 +165,7 @@ public class Automat
                     endzustaende[i + 1] = temp[i];
                 }
 
-                break;
+                return true;
             }
             endzustaende[i] = temp[i];
         }
@@ -249,13 +259,13 @@ public class Automat
                     if (uebergangstabelle[i][j] == zustand) uebergangstabelle[i][j] = -1;
                 }
             }
-            
+
             for (int i = 0; i < endzustaende.length; i++) {
                 if (zustand < endzustaende[i]) endzustaende[i]--;
             }
-            
+
             start--;
-            
+
         } else return false;
 
         return true;

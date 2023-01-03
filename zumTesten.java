@@ -389,7 +389,42 @@ public class zumTesten
 
     // 12
     private boolean getEndZustaendeTest () {
-        return false;
+        int[][] table = {{0,0,0},{2,2,0},{3,0,3},{0,0,0}};// = {{0,0,0},{2,2,0},{3,0,3},{0,0,0}};
+        int[] endstate = {3};// = {3};
+        char[] alphabet = {'a', 'b', 'c'};// = {'a', 'b', 'c'};
+        int start = 1;// 1
+
+        try {
+            Automat a = new Automat(table, endstate, alphabet, start);
+
+            a.addEndZustand(2);
+            
+            if (!(a.getEndZustaende()[0] == 2)) return false;
+            
+            if (!(a.getEndZustaende()[1] == 3)) return false;
+            
+            if (a.addEndZustand(2)) return false;
+            
+            if (!a.gehoertZuSprache("a")) return false;
+            
+            a.removeEndZustand(3);
+            
+            if (!(a.getEndZustaende()[0] == 2)) return false;
+            
+            if (a.gehoertZuSprache("aa")) return false;
+            
+            a.addEndZustand(3);
+            
+            if (!(a.getEndZustaende()[0] == 2)) return false;
+
+            if (!(a.getEndZustaende()[1] == 3)) return false;
+            
+            return true;
+        } 
+        catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     // 13
