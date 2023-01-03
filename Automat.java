@@ -135,14 +135,19 @@ public class Automat
     public boolean addEndZustand (int zustand) {
         if ((zustand < 0) || (zustand > uebergangstabelle.length - 1)) return false;
         if (istEndzustand(zustand)) return false;
+        
+        // check if endzustand exists
+        for (int i = 0; i < endzustaende.length; i++) {
+            if (endzustaende[i] == zustand) return false;
+        }
 
         int[] temp = new int[endzustaende.length];
-        for (int i = 0; i < endzustaende.length; i++) {
+        for (int i = 0; i < temp.length; i++) {
             temp[i] = endzustaende[i];
         }
 
         endzustaende = new int[temp.length + 1];
-        for (int i = 0; i < endzustaende.length; i++) {
+        for (int i = 0; i < temp.length; i++) {
             if (temp[i] > zustand) {
                 endzustaende[i] = zustand;
 
