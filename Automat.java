@@ -195,25 +195,28 @@ public class Automat
     // remove Endzustand
     public boolean removeEndZustand (int zustand) {
         if (endzustaende.length == 1) return false;
+        
+        // remove endzustand if state zustand is an endzustand
+        if (istEndzustand(zustand)) {
+            for (int i = 0; i < endzustaende.length; i++) {
+                if (endzustaende[i] == zustand){
+                    for (int j = i; j < endzustaende.length - 1; j++) {
+                        endzustaende[j] = endzustaende[j + 1];
+                    }
 
-        for (int i = 0; i < endzustaende.length; i++) {
-            if (endzustaende[i] == zustand){
-                for (int j = i; j < endzustaende.length - 1; j++) {
-                    endzustaende[j] = endzustaende[j + 1];
-                }
+                    int[] temp = new int[endzustaende.length];
+                    for (int j = 0; j < endzustaende.length; j++) {
+                        temp[j] = endzustaende[j];
+                    }
 
-                int[] temp = new int[endzustaende.length];
-                for (int j = 0; j < endzustaende.length; j++) {
-                    temp[j] = endzustaende[j];
+                    endzustaende = new int[temp.length - 1];
+                    for (int j = 0; j < endzustaende.length; j++) {
+                        endzustaende[j] = temp[j];
+                    }
+                    return true;
                 }
-
-                endzustaende = new int[temp.length - 1];
-                for (int j = 0; j < endzustaende.length; j++) {
-                    endzustaende[j] = temp[j];
-                }
-                return true;
             }
-        }
+        } else return false;
 
         return true;
     }
@@ -261,7 +264,6 @@ public class Automat
                         alphabet[j] = temp[j];
                     }
 
-                    
                     return true;
                 }
             }
@@ -279,6 +281,7 @@ public class Automat
                 if (!removeEndZustand(zustand)) return false;
             }
 
+            // make state table smaller
             int[][] temp = new int[uebergangstabelle.length][uebergangstabelle[0].length];
             for (int i = 0; i < uebergangstabelle.length; i++) {
                 for (int j = 0; j < uebergangstabelle[0].length; j++) {
@@ -299,12 +302,14 @@ public class Automat
                 }
             }
 
+            // set all pointers at state zustand to -1 so nothing would point at it
             for (int i = 0; i < uebergangstabelle.length; i++) {
                 for (int j = 0; j < uebergangstabelle[0].length; j++) {
                     if (uebergangstabelle[i][j] == zustand) uebergangstabelle[i][j] = -1;
                 }
             }
-            
+
+            // decrement all states by 1 if they are above state index zustand
             for (int i = 0; i < uebergangstabelle.length; i++) {
                 for (int j = 0; j < uebergangstabelle[0].length; j++) {
                     if (uebergangstabelle[i][j] > zustand) uebergangstabelle[i][j]--;
@@ -318,37 +323,43 @@ public class Automat
 
             start--;
 
+            return true;
         } else return false;
-
-        return true;
     }
 
     // change uebergang from node1 to node2
     public boolean setUebergang (int node1, int node2, char letter) {
+        // check if letter exists
         int index = indexImAlphabet(letter);
         if (index == -1) return false;
 
+        // check node1 and node2 for validity
         if ((node1 < 0) || (node1 > uebergangstabelle.length)) return false;
 
         if ((node2 < 0) || (node2 > uebergangstabelle.length)) return false;
 
+        // set uebergang
         uebergangstabelle[node1][index] = node2;
 
         return true;
     }
 
     public boolean parseXMLtoAutomat (String filePath) {
+        // create xml fetching class
         xmlConfig xmlcon;
         xmlcon = new xmlConfig();
         xmlcon.readFile(filePath);
 
+        // fetch items from xml file
         int[][] tempUebergangstabelle = xmlcon.getUebergangstabelle();
         int[] tempEndzustaende = xmlcon.getEndzustaende();
         char[] tempAlphabet = xmlcon.getAlphabet();
         int tempStart = xmlcon.getStart();
 
+        // check if items valid
         if (!checkValidity(tempUebergangstabelle, tempEndzustaende, tempAlphabet, tempStart)) return false;
 
+        // set fetched values
         uebergangstabelle = tempUebergangstabelle;
         endzustaende = tempEndzustaende;
         alphabet = tempAlphabet;
