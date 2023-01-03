@@ -126,7 +126,7 @@ public class zumTesten
 
         try {
             Automat a = new Automat(table, endstate, alphabet, start);
-            
+
             if (!a.gehoertZuSprache("aa")) return false;
             if (!a.gehoertZuSprache("ac")) return false;
             if (!a.gehoertZuSprache("ba")) return false;
@@ -137,12 +137,12 @@ public class zumTesten
             if (a.gehoertZuSprache("acb")) return false;
             if (a.gehoertZuSprache("d")) return false;
             if (a.gehoertZuSprache("bac")) return false;
-            
+
             a = new Automat();
-            
+
             if (!a.gehoertZuSprache("")) return false;
             if (a.gehoertZuSprache("0")) return false;
-            
+
             return true;
         } 
         catch (Exception e) {
@@ -160,23 +160,23 @@ public class zumTesten
 
         try {
             Automat a = new Automat(table, endstate, alphabet, start);
-            
+
             a.setStartZustand(3);
-            
+
             if (!(a.getStartZustand() == 3)) return false;
-            
+
             a.setStartZustand(2);
-            
+
             if (!(a.getStartZustand() == 2)) return false;
-            
+
             a.setStartZustand(0);
-            
+
             if (!(a.getStartZustand() == 0)) return false;
-            
+
             if (a.setStartZustand(4)) return false;
-            
+
             if (a.setStartZustand(-56)) return false;
-            
+
             return true;
         } 
         catch (Exception e) {
@@ -194,19 +194,19 @@ public class zumTesten
 
         try {
             Automat a = new Automat(table, endstate, alphabet, start);
-            
+
             a.addZustand();
-            
+
             if (!(a.getZustaendeAnzahl() == 5)) return false;
-            
+
             a.removeZustand(0);
-            
+
             a.removeZustand(4);
-            
+
             a.addZustand();
-            
+
             if (!(a.getZustaendeAnzahl() == 4)) return false;
-            
+
             return true;
         } 
         catch (Exception e) {
@@ -224,13 +224,13 @@ public class zumTesten
 
         try {
             Automat a = new Automat(table, endstate, alphabet, start);
-            
+
             a.addLetter('d');
-            
+
             if (!(a.getAlphabet()[a.getAlphabet().length - 1] == 'd')) return false;
-            
+
             if (a.addLetter('d')) return false;
-            
+
             return true;
         } 
         catch (Exception e) {
@@ -248,31 +248,31 @@ public class zumTesten
 
         try {
             Automat a = new Automat(table, endstate, alphabet, start);
-            
+
             a.addEndZustand(2);
-            
+
             boolean temp = false;
             int[] end = a.getEndZustaende();
-            
+
             for (int i = 0; i < a.getEndZustaende().length - 1; i++) {
                 if (end[i] == 2) temp = true;
             }
-            
+
             if (!temp) return false;
-            
+
             if (a.addEndZustand(2)) return false;
-            
+
             a.addEndZustand(0);
-            
+
             boolean temp1 = false;
             boolean temp2 = false;
-            
+
             for (int i = 0; i < a.getEndZustaende().length - 1; i++) {
                 if (end[i] == 0) temp = true;
                 if (end[i] == 2) temp1 = true;
                 if (end[i] == 3) temp2 = true;
             }
-            
+
             if (temp && temp1 && temp2) return true;
             return false;
         } 
@@ -291,17 +291,17 @@ public class zumTesten
 
         try {
             Automat a = new Automat(table, endstate, alphabet, start);
-            
+
             if (a.removeEndZustand(3)) return false;
-            
+
             a.addEndZustand(2);
-            
+
             if (!(a.getEndZustaende().length == 2)) return false;
-            
+
             a.removeEndZustand(3);
-            
+
             if (!(a.getEndZustaende().length == 1)) return false;
-            
+
             return true;
         } 
         catch (Exception e) {
@@ -337,11 +337,69 @@ public class zumTesten
 
     // 13
     private boolean getAlphabetTest () {
-        return false;
+        int[][] table = {{0,0,0},{2,2,0},{3,0,3},{0,0,0}};// = {{0,0,0},{2,2,0},{3,0,3},{0,0,0}};
+        int[] endstate = {3};// = {3};
+        char[] alphabet = {'a', 'b', 'c'};// = {'a', 'b', 'c'};
+        int start = 1;// 1
+
+        try {
+            Automat a = new Automat(table, endstate, alphabet, start);
+
+            char[] temp = a.getAlphabet();
+            
+
+            if (!(temp[0] == 'a')) System.out.println("1");;
+            if (!(temp[1] == 'b')) System.out.println("2");;
+            if (!(temp[2] == 'c')) System.out.println("3");;
+
+            a.addLetter('e');
+
+            temp = a.getAlphabet();
+            
+            for (int i = 0; i < temp.length; i++) System.out.println(temp[i]);
+
+            if (!(temp[0] == 'a')) System.out.println("4");;
+            if (!(temp[1] == 'b')) System.out.println("5");;
+            if (!(temp[2] == 'c')) System.out.println("6");;
+            if (!(temp[3] == 'e')) System.out.println("7");;
+
+            a.removeLetter('a');
+            
+            temp = a.getAlphabet();
+
+            if (!(temp[0] == 'b')) System.out.println("8");;
+            if (!(temp[1] == 'c')) System.out.println("9");;
+            if (!(temp[2] == 'e')) return false;
+
+            return true;
+        } 
+        catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     // 14
     private boolean getStartZustandTest () {
-        return false;
+        int[][] table = {{0,0,0},{2,2,0},{3,0,3},{0,0,0}};// = {{0,0,0},{2,2,0},{3,0,3},{0,0,0}};
+        int[] endstate = {3};// = {3};
+        char[] alphabet = {'a', 'b', 'c'};// = {'a', 'b', 'c'};
+        int start = 1;// 1
+
+        try {
+            Automat a = new Automat(table, endstate, alphabet, start);
+
+            if (!(a.getStartZustand() == 1)) return false;
+
+            a.setStartZustand(3);
+
+            if (!(a.getStartZustand() == 3)) return false;
+
+            return true;
+        } 
+        catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }
