@@ -20,8 +20,8 @@ public class zumTesten
      */
     public zumTesten()
     {
-        testBestanden = new boolean[76];
-        
+        testBestanden = new boolean[16];
+
         testBestanden[0] = xmlTest();
         testBestanden[1] = jsonTest();
         testBestanden[2] = gehoertZuSpracheTest();
@@ -32,10 +32,45 @@ public class zumTesten
         testBestanden[7] = removeEndZustandTest();
         testBestanden[8] = removeLetterTest();
         testBestanden[9] = removeZustandTest();
-        
+        testBestanden[10] = setUebergangTest();
+        testBestanden[11] = getZustaendeAnzahlTest();
+        testBestanden[12] = getEndZustaendeTest();
+        testBestanden[13] = getAlphabetTest();
+        testBestanden[14] = getStartZustandTest();
+        testBestanden[15] = mainTest();
+
+        int[] temp = new int[1];
+        int counter = 0;
+        temp[0] = -1;
         for (int i = 0; i < testBestanden.length; i++) {
-            if (testBestanden[i]) System.out.println("bestanden " + i);
-            else System.out.println("nicht bestanden " + i);
+            if (testBestanden[i]) {
+                System.out.println("Test " + i + " bestanden!");
+            }
+            else 
+            {
+                if (counter == temp.length) {
+                    int[] temptemp = new int[temp.length];
+                    for (int j = 0; j < temp.length; j++) {
+                        temptemp[i] = temp[i];
+                    }
+                    
+                    temp = new int[temptemp.length + 1];
+                    for (int j = 0; j < temptemp.length; j++) {
+                        temp[i] = temptemp[i];
+                    }
+                }
+                temp[counter] = i;
+                counter++;
+            }
+        }
+
+        if (temp[0] == -1) System.out.println("Alle Tests bestanden!");
+        else 
+        {
+            System.out.println("Die folgenden Test(s) wurden nicht bestanden:");
+            for (int i = 0; i < temp.length; i++) {
+                System.out.println("Test " + temp[i] + " nicht bestanden");
+            }
         }
     }
 
@@ -78,14 +113,44 @@ public class zumTesten
     private boolean removeEndZustandTest () {
         return false;
     }
-    
+
     // 8
     private boolean removeLetterTest () {
         return false;
     }
-    
+
     // 9
     private boolean removeZustandTest () {
+        return false;
+    }
+
+    // 10
+    private boolean setUebergangTest () {
+        return false;
+    }
+
+    // 11
+    private boolean getZustaendeAnzahlTest () {
+        return false;
+    }
+
+    // 12
+    private boolean getEndZustaendeTest () {
+        return false;
+    }
+
+    // 13
+    private boolean getAlphabetTest () {
+        return false;
+    }
+
+    // 14
+    private boolean getStartZustandTest () {
+        return false;
+    }
+
+    // 15
+    private boolean mainTest () {
         return false;
     }
 }
