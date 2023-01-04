@@ -16,6 +16,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.control.Button;
 import javafx.event.EventHandler;
 import javafx.event.ActionEvent;
+import javafx.scene.image.Image; 
+import javafx.scene.image.ImageView; 
+import javafx.geometry.Pos;
 
 public class AppGUI extends Application {
     private Controller c;
@@ -28,6 +31,8 @@ public class AppGUI extends Application {
     private Button bLos;
     private Button cXml;
     private Button cJson;
+    private ImageView correctLogo;
+    private ImageView incorrectLogo;
     public AppGUI(Automat automat){
      this.automat = automat;   
     }
@@ -44,13 +49,28 @@ public class AppGUI extends Application {
             tf = new TextField();
             TextField tfd= new TextField();
             VBox haupt = new VBox();
-           
+            HBox head = new HBox();
+            haupt.getChildren().add(head);
+            head.setAlignment(Pos.CENTER);
+            Image correct = new Image("assets/correct.png");
+            correctLogo = new ImageView();
+            correctLogo.setImage(correct);
+            Image incorrect = new Image("assets/incorrect.png");
+            incorrectLogo = new ImageView();
+            incorrectLogo.setImage(incorrect);
             
-
             
+            correctLogo.setFitHeight(60);
+            correctLogo.setFitWidth(60);
+            correctLogo.setVisible(false);
+            incorrectLogo.setVisible(false);
+            incorrectLogo.setFitHeight(60);
+            incorrectLogo.setFitWidth(60);
 
-            TextArea info = new TextArea("Prüfen Sie hier, ob ein Wort Teil der Sprache ist, dessen Wörter der Automat akzeptiert");
-            info.setEditable(false);
+             head.getChildren().add(correctLogo);
+            head.getChildren().add(incorrectLogo);
+            Label info = new Label("Prüfen Sie hier, ob ein Wort Teil der Sprache ist, dessen Wörter der Automat akzeptiert");
+            
             info.setPrefHeight(100);
             TextField eingabe = new TextField("Wort");
             bLos = new Button("prüfen");
@@ -64,14 +84,14 @@ public class AppGUI extends Application {
             cXml.setPrefWidth(200);
             cXml.setOnAction(e -> c.toXml(automat));
             
-            bLos.setOnAction(e -> c.prüfen(e, automat, eingabe, info));
+            bLos.setOnAction(e -> c.prüfen(e, automat, eingabe, info, correctLogo, incorrectLogo));
             bLos.setDefaultButton(true);
             haupt.getChildren().add(info);
             haupt.getChildren().add(eingabe);
             haupt.getChildren().add(bLos);
             haupt.getChildren().add(cJson);
             haupt.getChildren().add(cXml);
-
+           
 
             
             

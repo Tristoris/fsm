@@ -86,12 +86,16 @@ public class Controller {
         this.gui = gui;
     }
 
-    public void prüfen(ActionEvent eventm, Automat automat, TextField eingabe, TextArea info){
+    public void prüfen(ActionEvent eventm, Automat automat, TextField eingabe, Label info, ImageView correct, ImageView incorrect){
         String wort = eingabe.getText();
+        correct.setVisible(false);
+        incorrect.setVisible(false);
         if(automat.gehoertZuSprache(wort) == true){
             info.setText("DIESE WORT GEHÖRT ZUR BESCHRIEBENEN SPRACHE");
+            correct.setVisible(true);
         }else{
             info.setText("DIESE WORT GEHÖRT NICHT ZUR BESCHRIEBENEN SPRACHE\n");
+            incorrect.setVisible(true);
         }
     }
 
