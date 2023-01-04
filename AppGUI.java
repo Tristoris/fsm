@@ -26,6 +26,8 @@ public class AppGUI extends Application {
     private TextField tfd;
     private Automat automat;
     private Button bLos;
+    private Button cXml;
+    private Button cJson;
     public AppGUI(Automat automat){
      this.automat = automat;   
     }
@@ -54,11 +56,21 @@ public class AppGUI extends Application {
             bLos = new Button("prüfen");
             bLos.setPrefWidth(200);
             
+            cJson = new Button("to json");
+            cJson.setPrefWidth(200);
+            cJson.setOnAction(e -> c.toJson(automat));
+            
+            cXml = new Button("to xml");
+            cXml.setPrefWidth(200);
+            cXml.setOnAction(e -> c.toXml(automat));
+            
             bLos.setOnAction(e -> c.prüfen(e, automat, eingabe, info));
             bLos.setDefaultButton(true);
             haupt.getChildren().add(info);
             haupt.getChildren().add(eingabe);
             haupt.getChildren().add(bLos);
+            haupt.getChildren().add(cJson);
+            haupt.getChildren().add(cXml);
 
 
             

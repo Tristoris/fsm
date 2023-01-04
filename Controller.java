@@ -48,11 +48,11 @@ public class Controller {
 
         // buttonListeAktiverPlayerSetzen();
     }
-    public void toJson(){
+    public void toJson(Automat a){
     //gets called when to json Button was pressed
     }
-    public void toXml(){
-    //gets called when to xml Button was pressed
+    public void toXml(Automat a){
+    a.parseAutomatToXML("/xmlExport/");
     }
     void bLosClicked(Event event, Spinner tf,Spinner tfd) {
         try{

@@ -127,20 +127,13 @@ public class EditorGUI extends Application {
             bSnap.setPrefWidth(feldBreite);
             bSnap.setOnAction(e -> c.bTakeSnapshot(e,scene2));
             
-            cJson = new Button("to json");
-            cJson.setPrefWidth(feldBreite);
-            cJson.setOnAction(e -> c.toJson());
             
-            cXml = new Button("to xml");
-            cXml.setPrefWidth(feldBreite);
-            cXml.setOnAction(e -> c.toXml());
             
             
             
             buttonBox.getChildren().add(build);
             buttonBox.getChildren().add(bSnap);
-            buttonBox.getChildren().add(cJson);
-            buttonBox.getChildren().add(cXml);
+            
             
             
             startBox.getChildren().add(startInfo);
