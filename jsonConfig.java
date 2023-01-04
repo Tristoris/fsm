@@ -35,16 +35,36 @@ public class jsonConfig extends Config
                 JSONObject obj = (JSONObject)obj1;
                 
                 Object temp = obj.get("table");
-                uebergangstabelle = (int[][])temp;
+                JSONArray tempU = (JSONArray)temp;
+                JSONArray quick = (JSONArray)tempU.get(0);
+                uebergangstabelle = new int[tempU.size()][quick.size()];
+                for (int i = 0; i < tempU.size(); i++) {
+                    JSONArray tempUe = (JSONArray)tempU.get(i);
+                    for (int j = 0; j < tempUe.size(); j++) {
+                        long tempLong = (long)tempUe.get(j);
+                        uebergangstabelle[i][j] = (int)tempLong;
+                    }
+                }
                 
                 temp = obj.get("alphabet");
-                alphabet = (char[])temp;
+                JSONArray tempA = (JSONArray)temp;
+                alphabet = new char[tempA.size()];
+                for (int i = 0; i < tempA.size(); i++) {
+                    String tempString = (String)tempA.get(i);
+                    alphabet[i] = (char)tempString.charAt(0);
+                }
                 
                 temp = obj.get("endzustaende");
-                endzustaende = (int[])temp;
+                JSONArray tempE = (JSONArray)temp;
+                endzustaende = new int[tempE.size()];
+                for (int i = 0; i < tempE.size(); i++) {
+                    long tempLong = (long)tempE.get(i);
+                    endzustaende[i] = (int)tempLong;
+                }
                 
                 temp = obj.get("start");
-                start = (int)temp;
+                long tempLong = (long)temp;
+                start = (int)tempLong;
             }
             catch (ParseException pe)
             {

@@ -366,7 +366,7 @@ public class Automat
         uebergangstabelle = tempUebergangstabelle;
         endzustaende = tempEndzustaende;
         alphabet = tempAlphabet;
-        start = tempStart;
+       start = tempStart;
 
         return true;
     }
