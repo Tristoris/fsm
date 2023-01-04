@@ -54,7 +54,7 @@ public class EditorGUI extends Application {
             g = new GridPane();
             ta = new TextArea();
             ta.setPrefRowCount(4);
-            Controller c = new Controller(g,ta,eingabesymbol);
+            Controller c = new Controller(g,ta);
             c.meldeGUIAn(this);
             
             //structure components

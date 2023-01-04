@@ -26,8 +26,9 @@ public class Controller {
     private GridPane gp;
     private TextArea ta;
     private String style;
-    private int anzSpieler;
     private int anzahlSnapshots;
+    private int anzahlxmlExports;
+    private int anzahljsonExports;
     private Automat automat;
     private EditorGUI gui;
     private HauptGUI hg;
@@ -40,19 +41,22 @@ public class Controller {
         this.app = app;
     }
 
-    public Controller(GridPane gp, TextArea ta, int anzSpieler) {
+    public Controller(GridPane gp, TextArea ta) {
         this.gp = gp;
         this.ta = ta;
-        this.anzSpieler = anzSpieler;
         this.anzahlSnapshots = 0;
-
+        anzahljsonExports = 0;
+        anzahlxmlExports = 0;
+        
         // buttonListeAktiverPlayerSetzen();
     }
     public void toJson(Automat a){
-    //gets called when to json Button was pressed
+    a.parseAutomatToJSON("/jsonExport/export_" + anzahljsonExports + ".json");
+    anzahljsonExports++;
     }
     public void toXml(Automat a){
-    a.parseAutomatToXML("/xmlExport/");
+    a.parseAutomatToXML("/xmlExport/export_" + anzahlxmlExports + ".xml");
+    anzahlxmlExports++;
     }
     void bLosClicked(Event event, Spinner tf,Spinner tfd) {
         try{
