@@ -1,4 +1,5 @@
 import org.json.simple.*;
+import org.json.simple.parser.*;
 import java.io.*;
 
 /**
@@ -20,8 +21,42 @@ public class jsonConfig extends Config
     }
 
     public boolean readFile (String filePath) {
-        JSONObject obj = new JSONObject();
-
+        try
+        {
+            File file = new File(filePath);
+            InputStream inputStream = new FileInputStream(file);
+            
+            String stringFile = readFromInputStream(inputStream);
+            
+            JSONParser parser = new JSONParser();
+            try
+            {
+                Object obj1 = parser.parse(stringFile);
+                JSONObject obj = (JSONObject)obj1;
+                
+                Object temp = obj.get("table");
+                uebergangstabelle = (int[][])temp;
+                
+                temp = obj.get("alphabet");
+                alphabet = (char[])temp;
+                
+                temp = obj.get("endzustaende");
+                endzustaende = (int[])temp;
+                
+                temp = obj.get("start");
+                start = (int)temp;
+            }
+            catch (ParseException pe)
+            {
+                pe.printStackTrace();
+                return false;
+            }
+        }
+        catch (IOException ioe)
+        {
+            ioe.printStackTrace();
+            return false;
+        }
         
         return false;
     }
@@ -34,7 +69,7 @@ public class jsonConfig extends Config
         obj.put("alphabet", alphabet);
         obj.put("start", start);
         FileWriter file = null;
-        
+
         try {
             // Constructs a FileWriter given a file name, using the platform's default charset
             file = new FileWriter(filePath);
@@ -52,8 +87,21 @@ public class jsonConfig extends Config
                 return false;
             }
         }
-        
+
         return true;
+    }
+
+    private String readFromInputStream(InputStream inputStream)
+    throws IOException {
+        StringBuilder resultStringBuilder = new StringBuilder();
+        try (BufferedReader br
+        = new BufferedReader(new InputStreamReader(inputStream))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                resultStringBuilder.append(line).append("\n");
+            }
+        }
+        return resultStringBuilder.toString();
     }
 
     public void setUebergangstabelle (int[][] uebergangstabelle) {
