@@ -167,7 +167,6 @@ public class Automat
             temp[i] = endzustaende[i];
         }
 
-        
         endzustaende = new int[temp.length + 1];
         // if selected zustand biggest state, then just add it at the end
         if (zustand > temp[temp.length - 1]) {
@@ -178,7 +177,7 @@ public class Automat
             endzustaende[endzustaende.length - 1] = zustand;
             return true;
         }
-        
+
         // else put it in the middle and make others move one to the right
         for (int i = 0; i < temp.length; i++) {
             if (temp[i] > zustand) {
@@ -199,7 +198,7 @@ public class Automat
     // remove Endzustand
     public boolean removeEndZustand (int zustand) {
         if (endzustaende.length == 1) return false;
-        
+
         // remove endzustand if state zustand is an endzustand
         if (istEndzustand(zustand)) {
             for (int i = 0; i < endzustaende.length; i++) {
@@ -373,6 +372,25 @@ public class Automat
     }
 
     public boolean parseJSONtoAutomat (String filePath) {
+        // create xml fetching class
+        jsonConfig jsoncon;
+        jsoncon = new jsonConfig();
+        jsoncon.readFile(filePath);
+
+        // fetch items from xml file
+        int[][] tempUebergangstabelle = jsoncon.getUebergangstabelle();
+        int[] tempEndzustaende = jsoncon.getEndzustaende();
+        char[] tempAlphabet = jsoncon.getAlphabet();
+        int tempStart = jsoncon.getStart();
+
+        // check if items valid
+        if (!checkValidity(tempUebergangstabelle, tempEndzustaende, tempAlphabet, tempStart)) return false;
+
+        // set fetched values
+        uebergangstabelle = tempUebergangstabelle;
+        endzustaende = tempEndzustaende;
+        alphabet = tempAlphabet;
+        start = tempStart;
 
         return true;
     }

@@ -15,4 +15,16 @@
         __/ |                                                             
        |___/                                                              
 
+
+- To make everything work first do:
+
+git clone https://github.com/fangyidong/json-simple.git
+
+- after that you have to go the directory that was created and run the following command in there
+
+mvn package
+
+- then put the created jar file into the same directory as the .java files of Automat
+- To connect the library with Automat you have to add the .jar file to the library path
+
 - run HauptGui to start the application
