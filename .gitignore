@@ -4,3 +4,5 @@ doc/*.html
 doc/*.js
 doc/*.css
 .DS_Store
+*.bluej
+package.bluej
