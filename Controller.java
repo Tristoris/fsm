@@ -51,11 +51,11 @@ public class Controller {
         // buttonListeAktiverPlayerSetzen();
     }
     public void toJson(Automat a){
-    a.parseAutomatToJSON("/jsonExport/export_" + anzahljsonExports + ".json");
+    a.parseAutomatToJSON("jsonExport/export_" + anzahljsonExports + ".json");
     anzahljsonExports++;
     }
     public void toXml(Automat a){
-    a.parseAutomatToXML("/xmlExport/export_" + anzahlxmlExports + ".xml");
+    a.parseAutomatToXML("xmlExport/export_" + anzahlxmlExports + ".xml");
     anzahlxmlExports++;
     }
     void bLosClicked(Event event, Spinner tf,Spinner tfd) {

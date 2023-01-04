@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<config>
+    <table>
+        <state>
+            <nextState>1</nextState>
+            <nextState>-1</nextState>
+        </state>
+        <state>
+            <nextState>-1</nextState>
+            <nextState>-1</nextState>
+        </state>
+    </table>
+    <endState>
+        <state>1</state>
+    </endState>
+    <alphabet>
+        <char>a</char>
+        <char>b</char>
+    </alphabet>
+    <start>0</start>
+</config>
