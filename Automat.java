@@ -11,7 +11,6 @@ public class Automat
     private int[] endzustaende;
     private char[] alphabet;
     private int start;
-    private boolean[] zustaendeListe;
 
     /**
      * Automat braucht die Uebergangstabelle, Endzustaende, das Alphabet und den Startzustand
